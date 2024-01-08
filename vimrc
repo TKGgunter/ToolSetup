@@ -185,3 +185,5 @@ command OpenNotes execute 'Files' g:notes_directories[0]
 " nnoremap <F9> :wa <bar> :compiler gcc <bar> :silent! make %:r <CR> :cw <CR>
 " autocmd FileType rust :compiler rustc :make build
 
+" TODO
+let g:notes_conceal_url = 0
