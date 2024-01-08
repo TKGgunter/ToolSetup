@@ -1,2 +1,3 @@
 # VimSetup
-# VimSetup
+
+Personal vim setup.

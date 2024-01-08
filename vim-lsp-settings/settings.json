@@ -1,0 +1,18 @@
+{
+   "filetype": {"python": "pylsp"},
+   "pylsp-all": {
+     "workspace_config": {
+         "pylsp": {
+             "plugins": {
+                 "pycodestyle": {
+                     "enabled": true,
+                     "ignore": ["E226", "E302", "E41", "E501"],
+                     "max-line-length": 120,
+                     "maxLineLength" : 160,
+                     "max_line_length": 120
+                 }
+             }
+         }
+     }
+   }
+}
