@@ -187,3 +187,5 @@ command OpenNotes execute 'Files' g:notes_directories[0]
 
 " TODO
 let g:notes_conceal_url = 0
+let g:notes_conceal_code = 0
+
