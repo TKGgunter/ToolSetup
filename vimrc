@@ -5,12 +5,19 @@
 " TODO add this file to github so that it can be easily used across mulitple
 " Where to find lsp settings ~/.local/share/vim-lsp-settings/settings.json
 " machines.
+" Try to install mypy. Determine what python install pylsp is being run under.
+" /home/thothgunter/.local/share/vim-lsp-settings/servers/pylsp-all/venv/bin/python3 -m pip install pylsp-mypy
+"
+" Install Ag
 
 let mapleader = ' '
 set showcmd " Shows commands at the bottom of the screen.
 syntax on
 set nolist
 set hlsearch
+
+set path+=**
+set wildmenu
 
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
@@ -160,13 +167,14 @@ call plug#begin()
     Plug 'preservim/nerdtree'
     Plug 'kaarmu/typst.vim'
     Plug 'timonv/vim-cargo'
-    Plug '~/Documents/vim-plugins/chatbot'
 call plug#end()
 
 highlight LspWarningHighlight term=underline cterm=underline gui=underline
+highlight LspErrorHighlight ctermfg=Red term=underline cterm=underline,bold gui=underline
 nmap <Leader>lh : LspHover<CR>
 nmap <Leader>b : Buffers<CR>
 nmap <Leader>nt : NERDTree<CR>
+nmap <Leader>f : Ag<CR>
 " We may want to set this based on file type. This is the side column which
 " lsp and git uses to display problems.
 set signcolumn=no
@@ -189,3 +197,12 @@ command OpenNotes execute 'Files' g:notes_directories[0]
 let g:notes_conceal_url = 0
 let g:notes_conceal_code = 0
 
+" lsp settings
+let g:lsp_diagnostics_virtual_text_enabled = 1
+let g:lsp_text_edit_enabled = 1
+let g:lsp_diagnostics_echo_delay = 200
+let g:lsp_diagnostics_virtual_text_align = "after"
+let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
+let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
+
+" let g:lsp_log_file = expand('~/vim-lsp.log')

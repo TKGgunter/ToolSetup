@@ -10,6 +10,11 @@
                      "max-line-length": 120,
                      "maxLineLength" : 160,
                      "max_line_length": 120
+                 },
+                 "pylsp_mypy": {
+                     "enabled": true,
+                     "report_progress": true,
+                     "live_mode": false
                  }
              }
          }
