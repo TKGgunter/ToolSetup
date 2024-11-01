@@ -13,7 +13,7 @@
 let mapleader = ' '
 set showcmd " Shows commands at the bottom of the screen.
 syntax on
-set background=black
+set background=dark
 
 " Turns off $ at the end of each line.
 set nolist
