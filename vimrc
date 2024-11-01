@@ -13,10 +13,13 @@
 let mapleader = ' '
 set showcmd " Shows commands at the bottom of the screen.
 syntax on
+
+" Turns off $ at the end of each line.
 set nolist
 set hlsearch
 
-set path+=**
+if index(split(glob("`ls -a`")), ".git/") >= 0 
+    set path+=**
 set wildmenu
 
 " Note: Skip initialization for vim-tiny or vim-small.
@@ -166,7 +169,6 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree'
     Plug 'kaarmu/typst.vim'
-    Plug 'timonv/vim-cargo'
 call plug#end()
 
 highlight LspWarningHighlight term=underline cterm=underline gui=underline
