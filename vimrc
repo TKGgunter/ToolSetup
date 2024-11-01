@@ -21,6 +21,7 @@ set hlsearch
 
 if index(split(glob("`ls -a`")), ".git/") >= 0 
     set path+=**
+endif
 set wildmenu
 
 " Note: Skip initialization for vim-tiny or vim-small.
