@@ -1,14 +1,15 @@
 " Color tango dark scheme
 " Some syntax changes are added to .vim/after/syntax/syncolor.vim
 " get colors for 256 https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
-" TODO look into timeoutlen for future improvements for key sequence timeouts.
-" TODO add this file to github so that it can be easily used across mulitple
 " Where to find lsp settings ~/.local/share/vim-lsp-settings/settings.json
 " machines.
 " Try to install mypy. Determine what python install pylsp is being run under.
 " /home/thothgunter/.local/share/vim-lsp-settings/servers/pylsp-all/venv/bin/python3 -m pip install pylsp-mypy
 "
 " Install Ag
+"
+" Opens all project changes in vim at once in tabs
+" vim -p $(git status -s | cut -d ' ' -f3)
 
 let mapleader = ' '
 set showcmd " Shows commands at the bottom of the screen.
@@ -32,9 +33,15 @@ if &compatible
 endif
 
 
+" Settings for file viewer.
+let g:netrw_keepdir = 0
+let g:netrw_liststyle = 3
+
+
 " Required:
 setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 textwidth=100 smarttab expandtab nolist
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 textwidth=100 smarttab expandtab nolist foldmethod=indent
+autocmd TerminalOpen * setlocal nospell
 
 filetype plugin indent on
 set tabstop=2
@@ -74,7 +81,6 @@ autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . 
 
 " TODO Maybe clean up some time
 set foldmethod=syntax
-autocmd FileType python setlocal foldmethod=indent
 set foldlevelstart=99
 
 if has('gui_running')
@@ -169,16 +175,18 @@ call plug#begin()
     Plug 'mattn/vim-lsp-settings'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'preservim/nerdtree'
     Plug 'kaarmu/typst.vim'
+    Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
 highlight LspWarningHighlight term=underline cterm=underline gui=underline
 highlight LspErrorHighlight ctermfg=Red term=underline cterm=underline,bold gui=underline
 nmap <Leader>lh : LspHover<CR>
 nmap <Leader>b : Buffers<CR>
-nmap <Leader>nt : NERDTree<CR>
+nmap <Leader>t : Vexplore<CR>
 nmap <Leader>f : Ag<CR>
+nmap <Leader>e : LspNextError<CR>
+nmap <Leader>ep: LspPreviousError<CR>
 " We may want to set this based on file type. This is the side column which
 " lsp and git uses to display problems.
 set signcolumn=no
@@ -187,6 +195,7 @@ highlight SpellBad ctermbg=None ctermfg=208 cterm=underline,bold
 set spell
 
 highlight Pmenu ctermfg=255 ctermbg=239 guifg=#ffffff guibg=#0000ff
+hi Folded ctermbg=None cterm=bold
 
 " Notes directory
 let g:notes_directories = ['~/.vim/plugged/vim-notes/misc/notes/user', '~/Documents/vim-notes']
@@ -197,7 +206,7 @@ command OpenNotes execute 'Files' g:notes_directories[0]
 " nnoremap <F9> :wa <bar> :compiler gcc <bar> :silent! make %:r <CR> :cw <CR>
 " autocmd FileType rust :compiler rustc :make build
 
-" TODO
+" TODO what does this do? And why do we want it?
 let g:notes_conceal_url = 0
 let g:notes_conceal_code = 0
 
