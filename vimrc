@@ -20,9 +20,16 @@ set background=dark
 set nolist
 set hlsearch
 
-if index(split(glob("`ls -a`")), ".git/") >= 0 
-    set path+=**
+let ls_a_list = split(glob("`ls -a`")) 
+if index(ls_a_list, "src/") >- 0
+    set path+=src/**
 endif
+if index(ls_a_list, "test/") >- 0
+    set path+=test/**
+endif
+" if index(let_a_list, ".git/") >= 0 
+"     set path+=**
+" endif
 set wildmenu
 
 " Note: Skip initialization for vim-tiny or vim-small.
@@ -209,6 +216,10 @@ command OpenNotes execute 'Files' g:notes_directories[0]
 " TODO what does this do? And why do we want it?
 let g:notes_conceal_url = 0
 let g:notes_conceal_code = 0
+
+" NOTE Vim should NOT track netrw, the file browser, to determine the current
+" directory.
+let g:netrw_keepdir = 1
 
 " lsp settings
 let g:lsp_diagnostics_virtual_text_enabled = 1
