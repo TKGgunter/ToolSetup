@@ -194,6 +194,7 @@ nmap <Leader>t : Vexplore<CR>
 nmap <Leader>f : Ag<CR>
 nmap <Leader>e : LspNextError<CR>
 nmap <Leader>ep: LspPreviousError<CR>
+nmap <Leader>d : LspDocumentDiagnostics<CR>
 " We may want to set this based on file type. This is the side column which
 " lsp and git uses to display problems.
 set signcolumn=no
@@ -228,5 +229,6 @@ let g:lsp_diagnostics_echo_delay = 200
 let g:lsp_diagnostics_virtual_text_align = "after"
 let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
 let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
+let g:lsp_diagnostics_virtual_text_wrap = "truncate"
 
 " let g:lsp_log_file = expand('~/vim-lsp.log')
