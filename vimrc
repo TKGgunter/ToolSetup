@@ -14,11 +14,14 @@
 let mapleader = ' '
 set showcmd " Shows commands at the bottom of the screen.
 syntax on
-set background=dark
 
 " Turns off $ at the end of each line.
 set nolist
 set hlsearch
+set number
+set signcolumn=number
+" highlight SignColumn ctermbg=None
+
 
 let ls_a_list = split(glob("`ls -a`")) 
 if index(ls_a_list, "src/") >- 0
@@ -39,10 +42,16 @@ if &compatible
   set nocompatible    " Be iMproved
 endif
 
-
+"""""""""""""""""""""""""""""""""""
+" NETRW
 " Settings for file viewer.
 let g:netrw_keepdir = 0
 let g:netrw_liststyle = 3
+
+" NOTE Vim should NOT track netrw, the file browser, to determine the current
+" directory.
+let g:netrw_keepdir = 1
+"""""""""""""""""""""""""""""""""""
 
 
 " Required:
@@ -177,6 +186,7 @@ autocmd BufEnter * syntax sync minlines=30
 
 call plug#begin()
     Plug 'xolox/vim-misc'
+    " TODO remove vim-notes and replace with bash scripts
     Plug 'xolox/vim-notes'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
@@ -186,8 +196,6 @@ call plug#begin()
     Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
-highlight LspWarningHighlight term=underline cterm=underline gui=underline
-highlight LspErrorHighlight ctermfg=Red term=underline cterm=underline,bold gui=underline
 nmap <Leader>lh : LspHover<CR>
 nmap <Leader>b : Buffers<CR>
 nmap <Leader>t : Vexplore<CR>
@@ -197,13 +205,13 @@ nmap <Leader>ep: LspPreviousError<CR>
 nmap <Leader>d : LspDocumentDiagnostics<CR>
 " We may want to set this based on file type. This is the side column which
 " lsp and git uses to display problems.
-set signcolumn=no
     
 highlight SpellBad ctermbg=None ctermfg=208 cterm=underline,bold
 set spell
 
 highlight Pmenu ctermfg=255 ctermbg=239 guifg=#ffffff guibg=#0000ff
 hi Folded ctermbg=None cterm=bold
+hi LineNr ctermfg=darkgrey
 
 " Notes directory
 let g:notes_directories = ['~/.vim/plugged/vim-notes/misc/notes/user', '~/Documents/vim-notes']
@@ -218,17 +226,30 @@ command OpenNotes execute 'Files' g:notes_directories[0]
 let g:notes_conceal_url = 0
 let g:notes_conceal_code = 0
 
-" NOTE Vim should NOT track netrw, the file browser, to determine the current
-" directory.
-let g:netrw_keepdir = 1
-
 " lsp settings
-let g:lsp_diagnostics_virtual_text_enabled = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_text_edit_enabled = 1
-let g:lsp_diagnostics_echo_delay = 200
 let g:lsp_diagnostics_virtual_text_align = "after"
-let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
+let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
 let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
 let g:lsp_diagnostics_virtual_text_wrap = "truncate"
+let g:ls_diagnostics_enabled = 1
+let g:lsp_diagnostics_signs_enabled = 1
+let g:lsp_diagnostics_signs_error = {'text': 'X'}
+let g:lsp_diagnostics_signs_warning = {'text': 'W'}
+let g:lsp_diagnostics_highlights_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 0
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_delay = 200
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_float_max_width = 50
+let g:lsp_diagnostics_highlights_delay = 50
+let g:lsp_diagnostics_signs_delay = 50
+
+" NOTE
+" This highlights the bit of code that has an error.
+highlight LspWarningHighlight term=underline cterm=underline gui=underline
+highlight LspErrorHighlight ctermfg=Red term=underline cterm=underline,bold gui=underline
+highlight LspErrorText ctermfg=Red ctermbg=None cterm=bold,underline
 
 " let g:lsp_log_file = expand('~/vim-lsp.log')
