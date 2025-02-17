@@ -10,3 +10,8 @@ keybind = ctrl+h=goto_split:left
 keybind = ctrl+l=goto_split:right
 keybind = ctrl+j=goto_split:bottom
 keybind = ctrl+k=goto_split:top
+
+# Turns off integration so that the cursor behaves currectly when going in and out 
+# of vi mode.
+shell-integration = none
+shell-integration-features = false
