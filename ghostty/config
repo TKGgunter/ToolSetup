@@ -1,0 +1,12 @@
+theme = Builtin Tango Dark
+background            = #2E3436
+foreground            = #D3D7CF
+cursor-color          = #ffffff
+selection-background  = #b4d5ff
+
+font-family = Fira Mono
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+l=goto_split:right
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
