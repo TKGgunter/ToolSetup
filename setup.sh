@@ -8,7 +8,7 @@ cp vim-lsp-settings/settings.json ~/.local/share/vim-lsp-settings/.
 if [[ $OSTYPE == "linux-gnu" ]]; then
     cp ghostty/config ~/.config/ghostty
 
-elif [[ $OSTYPE == "darwin" ]]; then
+elif [[ "darwin" =~ $OSTYPE ]]; then
     cp ghostty/config $HOME/Library/Application\ Support/com.mitchellh.ghostty/config
 
 else
