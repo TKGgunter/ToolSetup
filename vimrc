@@ -19,6 +19,10 @@ syntax on
 set nolist
 set hlsearch
 set number
+" Turn of selectable side numbers
+" this doesn't work well for ghostty right now. I should create ticket to fix
+" this.
+set mouse=a
 set signcolumn=number
 " highlight SignColumn ctermbg=None
 
@@ -55,7 +59,8 @@ let g:netrw_keepdir = 1
 
 
 " Required:
-setlocal shiftwidth=4 tabstop=4 softtabstop=4
+" setlocal shiftwidth=4 tabstop=4 softtabstop=4 seems redundant with the
+" settings below.
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 textwidth=100 smarttab expandtab nolist foldmethod=indent
 autocmd TerminalOpen * setlocal nospell
 
@@ -63,6 +68,7 @@ filetype plugin indent on
 set tabstop=2
 set shiftwidth=4
 set expandtab
+set softtabstop=4
 
 " ''''''''''''''''''''
 " different cursor styles t_SI is insert mode
@@ -112,7 +118,7 @@ endif
 " Status Bar
 au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=darkcyan ctermbg=white
 au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=darkcyan ctermbg=black
-hi                  statusline guifg=#8fbfdc guibg=black ctermfg=darkcyan  ctermbg=black
+hi                  statusline guifg=#8fbfdc guibg=black ctermfg=darkcyan ctermbg=black
 
 highlight StatusLine2 ctermfg=250 ctermbg=237 guifg=#ffffff guibg=#0000ff
 
@@ -141,14 +147,14 @@ let g:modes={
 set laststatus=2
 
 set statusline=
-set statusline+=%#Cyan#\ %<%F%m%r%h%w\           " File path, modified, readonly, helpfile, preview
-set statusline+=%#StatusLine2#│                              " Separator
+set statusline+=%#Cyan#\ %<%F%m%r%h%w\         " File path, modified, readonly, helpfile, preview
+set statusline+=%#StatusLine2#│                " Separator
 set statusline+=\ %Y\                          " FileType
-set statusline+=│                                 " Separator
+set statusline+=│                              " Separator
 set statusline+=%=                             " Right Side
-set statusline+=│%{count}                         " Separator and count
+set statusline+=│%{count}                      " Separator and count
 set statusline+=\ ln:\ %02l/%L\ (%3p%%)\       " Line number / total lines, percentage of document
-set statusline+=%#Cyan#\ %{g:modes[mode()]}\    " The current mode
+set statusline+=%#Cyan#\ %{g:modes[mode()]}\   " The current mode
 
 hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
 " The following helps adjust the color scheme of the statusline when the cursor is not window 
@@ -194,6 +200,10 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'kaarmu/typst.vim'
     Plug 'dhruvasagar/vim-table-mode'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'madox2/vim-ai'
 call plug#end()
 
 nmap <Leader>lh : LspHover<CR>
@@ -252,4 +262,51 @@ highlight LspWarningHighlight term=underline cterm=underline gui=underline
 highlight LspErrorHighlight ctermfg=Red term=underline cterm=underline,bold gui=underline
 highlight LspErrorText ctermfg=Red ctermbg=None cterm=bold,underline
 
+let g:asyncomplete_auto_popup = 0
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" AI model config
+let s:vim_ai_endpoint_url = "http://localhost:8080/v1/chat/completions"
+let s:vim_ai_model = "llama"
+let s:vim_ai_chat_prompt =<< trim END
+>>> system
+
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.
+
+You will work in tandem with a human engineer on code generation, debugging and optimization.
+
+Assume all unknown symbols are properly initialized elsewhere. If their type or purpose is unclear, provide a reasonable assumption or ask clarifying questions.
+
+Use the appropriate syntax identifier after ``` (e.g., python, javascript, html). Default to plaintext if the language is unclear.
+
+If the input is incomplete or ambiguous, provide the most logical interpretation and suggest improvements or ask for clarifications.
+
+Provide concise, well-structured answers with clear code examples.
+END
+
+let s:vim_ai_chat_config = #{
+\  provider: "openai",
+\  options: #{
+\    model: s:vim_ai_model,
+\    initial_prompt: s:vim_ai_chat_prompt,
+\    endpoint_url: s:vim_ai_endpoint_url,
+\    auth_type: 'none',
+\    max_tokens: 0,
+\    max_completion_tokens: 0,
+\    request_timeout: 60,
+\  },
+\}
+let g:vim_ai_chat = s:vim_ai_chat_config
+
+" Toggle when debugging
 " let g:lsp_log_file = expand('~/vim-lsp.log')
