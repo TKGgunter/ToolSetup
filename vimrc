@@ -310,3 +310,8 @@ let g:vim_ai_chat = s:vim_ai_chat_config
 
 " Toggle when debugging
 " let g:lsp_log_file = expand('~/vim-lsp.log')
+
+" Highlight NOCHECKIN using the Todo highlight group.
+syntax keyword Todo NOCHECKIN
+" Removes spell check for every word in the Todo cluster including NOCHECKIN.
+syn cluster @NoSpell add=Todo
