@@ -25,7 +25,7 @@ set number
 set mouse=a
 set signcolumn=number
 " highlight SignColumn ctermbg=None
-
+set updatetime=10
 
 let ls_a_list = split(glob("`ls -a`")) 
 if index(ls_a_list, "src/") >- 0
@@ -229,6 +229,16 @@ set spell
 highlight Pmenu ctermfg=255 ctermbg=239 guifg=#ffffff guibg=#0000ff
 hi Folded ctermbg=None cterm=bold
 hi LineNr ctermfg=darkgrey
+
+au VimEnter * GitGutterSignsEnable
+hi GitGutterAdd ctermfg=green ctermbg=None
+hi GitGutterChange ctermfg=yellow ctermbg=None
+
+au VimEnter * GitGutterLineHighlightsDisable 
+au VimEnter * GitGutterLineNrHighlightsDisable
+" I wish this worked but it doesn't
+" au VimEnter * GitGutterLineNrHighlightsEnable  
+" hi GitGutterAddLineNr ctermfg=green ctermbg=None
 
 " Notes directory
 let g:notes_directories = ['~/.vim/plugged/vim-notes/misc/notes/user', '~/Documents/vim-notes']
