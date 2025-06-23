@@ -214,12 +214,18 @@ call plug#begin()
 call plug#end()
 
 nmap <Leader>lh : LspHover<CR>
+" opens a list of open buffers in a preview menu.
 nmap <Leader>b : Buffers<CR>
+" opens a directory listing in the current working directory
 nmap <Leader>t : Vexplore<CR>
+" Opens a preview window allowing user to search the contents of
+" the files in the current working directory.
 nmap <Leader>f : Ag<CR>
 nmap <Leader>e : LspNextError<CR>
 nmap <Leader>ep: LspPreviousError<CR>
 nmap <Leader>d : LspDocumentDiagnostics<CR>
+" run unit tests on the file.
+nmap <Leader>ut : <Plug>(ultest-run-file)
 " We may want to set this based on file type. This is the side column which
 " lsp and git uses to display problems.
     
