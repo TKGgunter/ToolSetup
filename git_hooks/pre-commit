@@ -11,6 +11,11 @@
 # This pre-commit hook checks for the existence of the word "$SEARCH_TARGET"
 # in your source files, then aborts the commit if any matches were found, with
 # output of file path, line number and match preview.
+#
+# NOTE from tkggunter
+# to set this as a default for all git repos add this file to the 
+# `.gittemplates/hooks` dir and run the following
+# `git config --global core.hooksPath ~/.git-templates/hooks`
 
 SEARCH_TARGET="nocheckin"
 
