@@ -3,6 +3,7 @@ cp vimrc ~/.vimrc
 cp after/syntax/syncolor.vim ~/.vim/after/syntax/.
 cp after/syntax/toml.vim ~/.vim/after/syntax/.
 cp vim-lsp-settings/settings.json ~/.local/share/vim-lsp-settings/.
+cp init.vim ~/.config/nvim/.
 
 # move the ghostty config where it needs to be.
 if [[ $OSTYPE == "linux-gnu" ]]; then
