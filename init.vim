@@ -190,6 +190,8 @@ call plug#begin()
   " lsp default configs for a number of langs
   Plug 'neovim/nvim-lspconfig'
   " nice fuzzy search and dependencies
+  " install ripgrep to search dir
+  " sudo apt-get install ripgrep
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   " Unit test tools
@@ -199,19 +201,42 @@ call plug#begin()
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'olimorris/codecompanion.nvim'
+  " markdown
+  Plug 'echasnovski/mini.nvim'
+  Plug 'MeanderingProgrammer/render-markdown.nvim'
 call plug#end()
 
 " require ai helper
-" lua << EOF
-"   require("codecompanion").setup({
-"     adapters = {
-"         opts = {
-"             allow_insecure = true,
-"             proxy = "",
-"         },
-"     },
-"   })
-" EOF
+lua << EOF
+require("codecompanion").setup({
+  strategies = {
+      chat = {
+          adapter = "ollama"
+      },
+      inline = {
+          adapter = "ollama"
+      }
+  },
+  adapters = {
+    llama3 = function()
+      return require("codecompanion.adapters").extend("ollama", {
+        name = "llama3", -- Give this adapter a different name to differentiate it from the default ollama adapter
+        schema = {
+          model = {
+            default = "llama3:latest",
+          },
+          num_ctx = {
+            default = 16384,
+          },
+          num_predict = {
+            default = -1,
+          },
+        },
+      })
+    end,
+  },
+})
+EOF
 
 " Turn off lsp syntax
 lua << EOF
@@ -239,6 +264,8 @@ EOF
 nmap <Leader>vt : Vterm<CR>
 " opens a list of open buffers in a preview menu.
 nmap <Leader>b : Telescope buffers<CR>
+" open a fuzzy search for the contents of files
+nmap <Leader>f : Telescope live_grep<CR>
 " Opens a hover virtual panel
 " you can also do this with shift+k
 nmap <Leader>lh : LspHover<CR>
