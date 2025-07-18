@@ -204,9 +204,12 @@ call plug#begin()
   " markdown
   Plug 'echasnovski/mini.nvim'
   Plug 'MeanderingProgrammer/render-markdown.nvim'
+  " gitgutter
+  Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " require ai helper
+" TODO choose ai based off of env
 lua << EOF
 require("codecompanion").setup({
   strategies = {
@@ -271,6 +274,8 @@ nmap <Leader>f : Telescope live_grep<CR>
 nmap <Leader>lh : LspHover<CR>
 " run unit tests on the file.
 nmap <Leader>ut : <Plug>(ultest-run-file)
+" clear search
+nmap <Leader>/ : noh<CR>
 
 " Setting up the rust analyzer
 lua vim.lsp.enable('rust_analyzer')
@@ -315,3 +320,26 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     end
 })
 EOF
+
+" Changing highlights for GitGutter
+" au VimEnter * GitGutterSignsEnable
+
+" Turn on gitgutter sign by default
+let g:gitgutter_signs=1
+
+" Turn off background of gitgutter
+hi SignColumn ctermbg=None
+
+" Set foreground color for added lines
+hi GitGutterAdd ctermfg=green
+" Set foreground color for changed lines
+hi GitGutterChange ctermfg=yellow ctermbg=None
+
+" hi GitGutterAddLineNr ctermfg=green ctermbg=None
+" hi GitGutterChangeLineNr ctermfg=yellow ctermbg=None
+
+au VimEnter * GitGutterLineHighlightsDisable 
+
+" TODO
+" - change markdown highlight colors to be more subtle
+" - use line numbers instead of signs for git gutter
