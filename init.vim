@@ -343,3 +343,4 @@ au VimEnter * GitGutterLineHighlightsDisable
 " TODO
 " - change markdown highlight colors to be more subtle
 " - use line numbers instead of signs for git gutter
+hi RenderMarkdownH1Bg ctermbg=darkgrey
