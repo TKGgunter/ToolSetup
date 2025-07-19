@@ -1,3 +1,3 @@
-# VimSetup
+# ToolSetup
 
-Personal vim setup.
+Personal tool configurations
