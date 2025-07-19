@@ -201,12 +201,19 @@ call plug#begin()
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'olimorris/codecompanion.nvim'
-  " markdown
+  " markdown renderer and mini-icons for pretty-ness
   Plug 'echasnovski/mini.nvim'
   Plug 'MeanderingProgrammer/render-markdown.nvim'
   " gitgutter
   Plug 'airblade/vim-gitgutter'
+  " better support than default lsp integration with rust-analyser 
+  Plug 'mrcjkb/rustaceanvim'
 call plug#end()
+
+" Turning on icons used by markdown
+lua << EOF
+require("mini.icons").setup()
+EOF
 
 " require ai helper
 " TODO choose ai based off of env
@@ -277,9 +284,6 @@ nmap <Leader>ut : <Plug>(ultest-run-file)
 " clear search
 nmap <Leader>/ : noh<CR>
 
-" Setting up the rust analyzer
-lua vim.lsp.enable('rust_analyzer')
-
 " Makes diagnostic column the same as number column
 set signcolumn=number
 " Setup diagnostics symbols
@@ -344,3 +348,12 @@ au VimEnter * GitGutterLineHighlightsDisable
 " - change markdown highlight colors to be more subtle
 " - use line numbers instead of signs for git gutter
 hi RenderMarkdownH1Bg ctermbg=darkgrey
+hi RenderMarkdownCode ctermbg=0
+
+
+" change Pmenu colors to not purple
+hi Pmenu ctermbg=darkgrey
+hi PmenuKind ctermbg=darkgrey
+hi PmenuExtra ctermbg=darkgrey
+hi PmenuMatch ctermbg=darkgrey
+
