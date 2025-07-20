@@ -183,7 +183,7 @@ command -nargs=0 Vterm :vert term
 command -nargs=0 Sterm :hor term
 
 
-" Lsp Hover short command
+" Lsp Hover short command and set default settings
 command -nargs=0 LspHover :lua vim.lsp.buf.hover({border='rounded'})
 
 call plug#begin()
@@ -194,9 +194,6 @@ call plug#begin()
   " sudo apt-get install ripgrep
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-  " Unit test tools
-  " Plug 'vim-test/vim-test'
-  " Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
   " Ai assistant
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-treesitter/nvim-treesitter'
@@ -208,6 +205,10 @@ call plug#begin()
   Plug 'airblade/vim-gitgutter'
   " better support than default lsp integration with rust-analyser 
   Plug 'mrcjkb/rustaceanvim'
+  " Unit test tools
+  Plug 'antoinemadec/FixCursorHold.nvim'
+  Plug 'nvim-neotest/nvim-nio'
+  Plug 'nvim-neotest/neotest'
 call plug#end()
 
 " Turning on icons used by markdown
