@@ -358,3 +358,13 @@ hi PmenuKind ctermbg=darkgrey
 hi PmenuExtra ctermbg=darkgrey
 hi PmenuMatch ctermbg=darkgrey
 
+" config ruff-lsp.
+lua << EOF
+require('lspconfig').ruff_lsp.setup {
+    init_options = {
+        settings = {
+            args = {},
+        }
+    }
+}
+EOF
