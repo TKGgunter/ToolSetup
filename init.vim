@@ -183,9 +183,6 @@ command -nargs=0 Vterm :vert term
 command -nargs=0 Sterm :hor term
 
 
-" Lsp Hover short command and set default settings
-command -nargs=0 LspHover :lua vim.lsp.buf.hover({border='rounded'})
-
 call plug#begin()
   " lsp default configs for a number of langs
   Plug 'neovim/nvim-lspconfig'
@@ -396,5 +393,11 @@ require('lspconfig').pyright.setup {
     },
   },
 }
-
 EOF
+
+
+" Lsp Hover short command and set default settings
+command -nargs=0 LspHover :lua vim.lsp.buf.hover({border='rounded'})
+" remaps omnifunc to shift-tab this is intended to move lsp complete to a more
+" comfortable mapping, shift-tab.
+inoremap <S-TAB> <C-x><C-o>
