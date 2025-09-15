@@ -132,6 +132,7 @@ highlight Todo ctermbg=None ctermfg=lightyellow cterm=underline,bold
 highlight NormalFloat ctermfg=grey ctermbg=237
 
 
+" These are terminal short cut commands.
 " Disable insert mode after process exits, so the buffer can't be closed by
 " accident. This is NeoVim specific!
 augroup Term
@@ -180,7 +181,7 @@ command -nargs=0 Vterm :vert term
 
 " Creates a split and in the new upper buffer places a terminal
 " and places the cursor in the new buffer
-command -nargs=0 Sterm :hor term
+command -nargs=0 Hterm :hor term
 
 
 call plug#begin()
