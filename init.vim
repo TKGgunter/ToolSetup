@@ -207,11 +207,21 @@ call plug#begin()
   Plug 'antoinemadec/FixCursorHold.nvim'
   Plug 'nvim-neotest/nvim-nio'
   Plug 'nvim-neotest/neotest'
+  " oil for buffer based dir viewing
+  Plug 'stevearc/oil.nvim'
 call plug#end()
 
 " Turning on icons used by markdown
 lua << EOF
 require("mini.icons").setup()
+EOF
+
+lua << EOF
+require("oil").setup({
+    view_options = {
+        show_hidden = true 
+    }
+})
 EOF
 
 " require ai helper

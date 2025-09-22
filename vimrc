@@ -19,18 +19,21 @@ syntax on
 set nolist
 set hlsearch
 set number
-" Turn of selectable side numbers
-" this doesn't work well for ghostty right now. I should create ticket to fix
+" Turn off selectable side numbers
+" this may not work well for ghostty right now. I should create ticket to fix
 " this.
 set mouse=a
 set signcolumn=number
 " highlight SignColumn ctermbg=None
 set updatetime=10
 
+" Adds src code directory to path
 let ls_a_list = split(glob("`ls -a`")) 
 if index(ls_a_list, "src/") >- 0
     set path+=src/**
 endif
+
+" Add test directory to path
 if index(ls_a_list, "test/") >- 0
     set path+=test/**
 endif
@@ -49,7 +52,6 @@ endif
 """""""""""""""""""""""""""""""""""
 " NETRW
 " Settings for file viewer.
-let g:netrw_keepdir = 0
 let g:netrw_liststyle = 3
 
 " NOTE Vim should NOT track netrw, the file browser, to determine the current
@@ -76,7 +78,7 @@ let &t_SI = "\e[5 q"
 let &t_EI = "\e[2 q"
 
 " TODO what does this do? I think this should open the file with cursor at the
-" previous position.
+" previous position.  06/27/25
 if has("autocmd")
    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
@@ -335,6 +337,6 @@ let g:vim_ai_chat = s:vim_ai_chat_config
 " let g:lsp_log_file = expand('~/vim-lsp.log')
 
 " Highlight NOCHECKIN using the Todo highlight group.
-syntax keyword Todo NOCHECKIN
+syntax keyword Nocheckin NOCHECKIN nocheckin
 " Removes spell check for every word in the Todo cluster including NOCHECKIN.
-syn cluster @NoSpell add=Todo
+syn cluster @NoSpell add=Nocheckin
