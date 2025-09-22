@@ -217,6 +217,18 @@ require("mini.icons").setup()
 EOF
 
 lua << EOF
+require('render-markdown').setup({
+    code = {
+        conceal_delimiters = false,
+        border = 'thin',
+    },
+    heading = {
+        width = 'block',
+    }
+})
+EOF
+
+lua << EOF
 require("oil").setup({
     view_options = {
         show_hidden = true 
