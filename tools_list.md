@@ -1,7 +1,11 @@
+## our nice terminal
 - ghostty https://ghostty.org/
-> our nice terminal
+## use this to view images in the terminal
 - chafa https://hpjansson.org/chafa
-> use this to view images in the terminal
+## Other things
 - ruff
 - pyright 
 > pip3 install pyright
+
+Nice Alias
+`git log --oneline --decorate --graph --all`
