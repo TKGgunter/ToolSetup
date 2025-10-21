@@ -1,3 +1,3 @@
 # ToolSetup
 
-Personal tool configurations
+TODO: Explain how to use.

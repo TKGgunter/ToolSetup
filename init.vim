@@ -378,6 +378,11 @@ hi PmenuKind ctermbg=darkgrey
 hi PmenuExtra ctermbg=darkgrey
 hi PmenuMatch ctermbg=darkgrey
 
+" change special comment color from pink/purple to grey.
+" When pink it creates significant visual noise that makes it harder to read
+" the code through the docstrings
+hi SpecialComment ctermfg=darkgray
+
 " config ruff-lsp.
 lua << EOF
 require('lspconfig').ruff_lsp.setup {
