@@ -14,6 +14,10 @@ syntax on
 " Turn on spell check 
 set spell
 highlight SpellBad ctermbg=None ctermfg=208 cterm=underline,bold
+" Turn off SpellCap highlighting.
+" SpellCap highlights words that vim believes should have a leading capital
+" letter but do not.
+highlight clear SpellCap
 
 " Turns off $ at the end of each line.
 set nolist
