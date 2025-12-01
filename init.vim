@@ -430,6 +430,8 @@ EOF
 
 " Lsp Hover short command and set default settings
 command -nargs=0 LspHover :lua vim.lsp.buf.hover({border='rounded'})
-" remaps omnifunc to shift-tab this is intended to move lsp complete to a more
-" comfortable mapping, shift-tab.
+
+" Remap omnifunc(the lsp auto-complete function) to shift-tab. This is intended
+" to move lsp complete to a more comfortable mapping, shift-tab. To navigate
+" the autocomplete menu use the standard autocomplete navigation <C-N> and <C-P>.
 inoremap <S-TAB> <C-x><C-o>
