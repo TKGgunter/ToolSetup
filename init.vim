@@ -213,6 +213,13 @@ call plug#begin()
   Plug 'nvim-neotest/neotest'
   " oil for buffer based dir viewing
   Plug 'stevearc/oil.nvim'
+  " d2 used to create uml diagrams.
+  " :help d2-vim
+  "
+  " # Useful commands
+  " <Leader>d2  # to create an ascii preview
+  " <Leader>rd2  # to replace text with ascii preview
+  Plug 'terrastruct/d2-vim'
 call plug#end()
 
 " Turning on icons used by markdown
