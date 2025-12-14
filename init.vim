@@ -213,13 +213,24 @@ call plug#begin()
   Plug 'nvim-neotest/neotest'
   " oil for buffer based dir viewing
   Plug 'stevearc/oil.nvim'
-  " d2 used to create uml diagrams.
+  " # d2 - for creating uml diagrams.
   " :help d2-vim
   "
   " # Useful commands
   " <Leader>d2  # to create an ascii preview
   " <Leader>rd2  # to replace text with ascii preview
   Plug 'terrastruct/d2-vim'
+  " # python lsp
+  " install basedpyright for lsp support.
+  "
+  " pip install basedpyright
+  "
+  " I find basedpyright works more frequency then pyright.
+  " basedpyright allows takes on the responsibility of installing and up
+  " keeping npm, something I am not interested in doing.
+  "
+  " # python formatting and syntax suggestions
+  " pip install ruff
 call plug#end()
 
 " Turning on icons used by markdown
@@ -418,6 +429,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
   desc = 'LSP: Disable hover capability from Ruff',
 })
 
+vim.lsp.enable("basedpyright")
+-- TODO do we need this?
+--[[
 require('lspconfig').pyright.setup {
   settings = {
     pyright = {
@@ -432,6 +446,7 @@ require('lspconfig').pyright.setup {
     },
   },
 }
+]]
 EOF
 
 
