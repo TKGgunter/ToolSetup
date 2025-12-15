@@ -9,6 +9,12 @@ cp init.vim ~/.config/nvim/.
 if [[ $OSTYPE == "linux-gnu" ]]; then
     cp ghostty/config ~/.config/ghostty
 
+# TODO
+# doesn't work on the new macos. Investigate when there is time.
+#
+# See below
+# `--> echo $OSTYPE
+# darwin24.0
 elif [[ "darwin" =~ $OSTYPE ]]; then
     cp ghostty/config $HOME/Library/Application\ Support/com.mitchellh.ghostty/config
     # TODO
