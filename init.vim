@@ -322,8 +322,6 @@ nmap <Leader>f : Telescope live_grep<CR>
 " Opens a hover virtual panel
 " you can also do this with shift+k
 nmap <Leader>lh : LspHover<CR>
-" run unit tests on the file.
-nmap <Leader>ut : <Plug>(ultest-run-file)
 " clear search
 nmap <Leader>/ : noh<CR>
 
