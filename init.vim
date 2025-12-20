@@ -188,6 +188,13 @@ command -nargs=0 Vterm :vert term
 command -nargs=0 Hterm :hor term
 
 
+" Plug in manager is Vim-plug
+" https://github.com/junegunn/vim-plug
+"
+" to install in nvim
+"
+" sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+"       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin()
   " lsp default configs for a number of langs
   Plug 'neovim/nvim-lspconfig'
