@@ -396,7 +396,7 @@ au VimEnter * GitGutterLineHighlightsDisable
 " - change markdown highlight colors to be more subtle
 " - use line numbers instead of signs for git gutter
 hi RenderMarkdownH1Bg ctermbg=darkgrey
-hi RenderMarkdownCode ctermbg=0
+hi RenderMarkdownCode ctermbg=236
 
 
 " change Pmenu colors to not purple
