@@ -462,3 +462,25 @@ command -nargs=0 LspHover :lua vim.lsp.buf.hover({border='rounded'})
 " to move lsp complete to a more comfortable mapping, shift-tab. To navigate
 " the autocomplete menu use the standard autocomplete navigation <C-N> and <C-P>.
 inoremap <S-TAB> <C-x><C-o>
+
+" Floating window helper
+" https://www.statox.fr/posts/2021/03/breaking_habits_floating_window/
+function! RememberShortCuts() abort
+    let width = 50
+    let height = 10
+
+    let buf = nvim_create_buf(v:false, v:true)
+
+    let ui = nvim_list_uis()[0]
+    call nvim_buf_set_text(buf, 0, -1, 0, -1, ["'%' - jump to opposite(open/close) bracket."])
+
+    let opts = {'relative': 'editor',
+                \ 'width': width,
+                \ 'height': height,
+                \ 'col': (ui.width - width),
+                \ 'row': 0,
+                \ 'anchor': 'NW',
+                \ 'style': 'minimal',
+                \ }
+    let win = nvim_open_win(buf, 1, opts)
+endfunction
