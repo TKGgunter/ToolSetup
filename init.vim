@@ -472,7 +472,13 @@ function! RememberShortCuts() abort
     let buf = nvim_create_buf(v:false, v:true)
 
     let ui = nvim_list_uis()[0]
-    call nvim_buf_set_text(buf, 0, -1, 0, -1, ["'%' - jump to opposite(open/close) bracket."])
+    call nvim_buf_set_text(buf, 0, -1, 0, -1, ["'<C-w><C-w>' - jump to and from float window",
+                                              \ "'%' - jump to opposite(open/close) bracket.",
+                                              \ "'}' - jump to bottom of code block",
+                                              \ "'<Leader>/' - clear search highlights",
+                                              \ "'<Leader>b' - Telescope current buffers",
+                                              \ "'<Leader>f' - Telescope live_grep",
+                                              \ "'<Leader>rd2' - replace selected with  d2 ascii"])
 
     let opts = {'relative': 'editor',
                 \ 'width': width,
@@ -484,3 +490,5 @@ function! RememberShortCuts() abort
                 \ }
     let win = nvim_open_win(buf, 1, opts)
 endfunction
+
+nmap <Leader>h :call RememberShortCuts()<CR>
