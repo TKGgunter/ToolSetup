@@ -202,7 +202,7 @@ call plug#begin()
   " install ripgrep to search dir
   " sudo apt-get install ripgrep
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+  Plug 'nvim-telescope/telescope.nvim' ", { 'tag': '0.1.8' }  NOT SURE WHY THIS VERSION WAS NEEDED
   " Ai assistant
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-treesitter/nvim-treesitter'
@@ -269,7 +269,7 @@ EOF
 " TODO choose ai based off of env
 lua << EOF
 require("codecompanion").setup({
-  strategies = {
+  interactions = {
       chat = {
           adapter = "ollama"
       },
@@ -278,6 +278,7 @@ require("codecompanion").setup({
       }
   },
   adapters = {
+    http = {
     llama3 = function()
       return require("codecompanion.adapters").extend("ollama", {
         name = "llama3", -- Give this adapter a different name to differentiate it from the default ollama adapter
@@ -294,6 +295,7 @@ require("codecompanion").setup({
         },
       })
     end,
+    },
   },
 })
 EOF
@@ -412,7 +414,7 @@ hi SpecialComment ctermfg=darkgray
 
 " config ruff-lsp.
 lua << EOF
-require('lspconfig').ruff_lsp.setup {
+require('lspconfig').ruff.setup {
     init_options = {
         settings = {
             args = {},
