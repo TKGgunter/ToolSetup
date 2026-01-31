@@ -238,6 +238,9 @@ call plug#begin()
   "
   " # python formatting and syntax suggestions
   " pip install ruff
+
+  " render image in buffer
+  Plug '3rd/image.nvim'
 call plug#end()
 
 " Turning on icons used by markdown
@@ -245,6 +248,7 @@ lua << EOF
 require("mini.icons").setup()
 EOF
 
+" Set up markdown rendering
 lua << EOF
 require('render-markdown').setup({
     code = {
@@ -255,6 +259,8 @@ require('render-markdown').setup({
         width = 'block',
     }
 })
+-- Set up the `3rd/image` to render images
+require('image').setup()
 EOF
 
 lua << EOF

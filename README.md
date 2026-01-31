@@ -4,6 +4,8 @@ TODO: Explain how to use.
 
 > [!NOTE]
 > Use ripgrep, `rg`, instead of grep when recursively searching through files.
+> install `kitty` for inline graphics
+> alias command to render image in terminal `kitty +kitten icat <image-path>`
 
 > [!NOTE]
 > **Firefox bookmarks**
