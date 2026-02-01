@@ -5,7 +5,10 @@
 ## Other things
 - ruff
 - pyright 
-> pip3 install pyright
+- pip3 install pyright
+- kitty for terminal image rendering
+    - https://sw.kovidgoyal.net/kitty/binary/
 
 Nice Alias
 `git log --oneline --decorate --graph --all`
+`kitty +kitten icat`
