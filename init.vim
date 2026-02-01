@@ -486,7 +486,8 @@ function! RememberShortCuts() abort
                                               \ "'<Leader>/' - clear search highlights",
                                               \ "'<Leader>b' - Telescope current buffers",
                                               \ "'<Leader>f' - Telescope live_grep",
-                                              \ "'<Leader>rd2' - replace selected with  d2 ascii"])
+                                              \ "'<Leader>rd2' - replace selected with  d2 ascii"],
+                                              \ "'! pandoc -f asciidoc -t markdown' - call pandoc to convert"])
 
     let opts = {'relative': 'editor',
                 \ 'width': width,
