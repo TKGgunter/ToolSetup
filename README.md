@@ -1,6 +1,9 @@
 # ToolSetup
 
-TODO: Explain how to use.
+TODO:
+- Explain how to use.
+- there are errors when rendering markdown in fuzz
+
 
 > [!NOTE]
 > Use ripgrep, `rg`, instead of grep when recursively searching through files.
