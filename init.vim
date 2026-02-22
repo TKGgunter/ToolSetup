@@ -241,6 +241,8 @@ call plug#begin()
 
   " render image in buffer
   Plug '3rd/image.nvim'
+  " auto render diagrams and plots in buffer (d2, gnuplot)
+  Plug '3rd/diagram.nvim'
 call plug#end()
 
 " Turning on icons used by markdown
@@ -261,6 +263,18 @@ require('render-markdown').setup({
 })
 -- Set up the `3rd/image` to render images
 require('image').setup()
+-- Playing around with this. Not sure how much I like it.
+-- require('diagram').setup({
+--     integrations = {
+--         require("diagram.integrations.markdown"),
+--     },
+--     renderer_options = {
+--         gnuplot = {
+--               theme = "dark",
+--               size = "800,600",
+--         },
+--     }
+-- })
 EOF
 
 lua << EOF
@@ -270,6 +284,13 @@ require("oil").setup({
     }
 })
 EOF
+
+"lua << EOF
+"require('nvim-treesitter').setup({
+"    -- A list of parser names, or "all" (the first time it is run)
+"    ensure_installed = { "yaml" }
+"})
+"EOF
 
 " require ai helper
 " TODO choose ai based off of env
@@ -405,7 +426,7 @@ au VimEnter * GitGutterLineHighlightsDisable
 " - use line numbers instead of signs for git gutter
 hi RenderMarkdownH1Bg ctermbg=darkgrey
 hi RenderMarkdownCode ctermbg=236
-hi RenderMarkdownH1Bg ctermbg=black
+hi RenderMarkdownH4Bg ctermbg=black
 
 
 " change Pmenu colors to not purple
