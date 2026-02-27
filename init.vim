@@ -187,11 +187,15 @@ command -nargs=0 Vterm :vert term
 " and places the cursor in the new buffer
 command -nargs=0 Hterm :hor term
 
+" Use skeleton template when creating a markdown file
+" TODO :help skeleton to auto add date created
+autocmd BufNewFile *.md 0r ~/vim/skeleton.md
+
 
 " Plug in manager is Vim-plug
 " https://github.com/junegunn/vim-plug
 "
-" to install in nvim
+" To install in nvim execute the following:
 "
 " sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 "       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'

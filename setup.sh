@@ -6,6 +6,10 @@ cp vim-lsp-settings/settings.json ~/.local/share/vim-lsp-settings/.
 cp init.vim ~/.config/nvim/.
 cp search_tags.sh ~/.local/bin/.
 
+# copy skeleton templates
+mkdir -p ~/vim/
+cp vim/* ~/vim/.
+
 # move the ghostty config where it needs to be.
 if [[ $OSTYPE == "linux-gnu" ]]; then
     cp ghostty/config ~/.config/ghostty
