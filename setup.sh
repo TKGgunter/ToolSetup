@@ -5,6 +5,7 @@ cp after/syntax/toml.vim ~/.vim/after/syntax/.
 cp vim-lsp-settings/settings.json ~/.local/share/vim-lsp-settings/.
 cp init.vim ~/.config/nvim/.
 cp search_tags.sh ~/.local/bin/.
+cp notes ~/.local/bin/.
 
 # copy skeleton templates
 mkdir -p ~/vim/
