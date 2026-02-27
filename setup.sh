@@ -6,6 +6,7 @@ cp vim-lsp-settings/settings.json ~/.local/share/vim-lsp-settings/.
 cp init.vim ~/.config/nvim/.
 cp search_tags.sh ~/.local/bin/.
 cp notes ~/.local/bin/.
+cp mdtags ~/.local/bin/.
 
 # copy skeleton templates
 mkdir -p ~/vim/

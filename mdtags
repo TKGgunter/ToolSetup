@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+# "strict mode" — makes bash behave more like a compiled language:
+#   -e: exit immediately if any command fails
+#   -u: error on undefined variables (instead of silently using "")
+#   -o pipefail: if any command in a pipeline fails, the whole pipeline fails
+set -euo pipefail
+
+# First argument ($1) is the directory to scan.
+# "${1:-.}" means: use $1 if provided, otherwise default to "." (current dir).
+dir="${1:-.}"
+
+# -d tests if the path is a directory. ! negates it.
+# >&2 redirects output to stderr (standard error) instead of stdout.
+if [[ ! -d "$dir" ]]; then
+  echo "Error: '$dir' is not a directory" >&2
+  exit 1  # non-zero exit = failure (convention)
+fi
+
+# --- Stage 1: Find all .md files recursively ---
+
+# "command -v <tool>" checks if a tool is installed (returns 0 if yes).
+# &>/dev/null silences all output (both stdout and stderr).
+if command -v rg &>/dev/null; then
+  # rg (ripgrep) --files: list files only (no searching content)
+  # -g '*.md': glob filter — only markdown files
+  files=$(rg --files -g '*.md' "$dir")
+else
+  # Fallback: standard `find` command
+  # -name '*.md': match filenames ending in .md
+  # -type f: only regular files (not directories)
+  files=$(find "$dir" -name '*.md' -type f)
+fi
+
+# If no files found, exit cleanly (exit 0 = success).
+# -z tests if a string is empty.
+[[ -z "$files" ]] && exit 0
+
+# --- Stage 2: Extract tags from YAML frontmatter ---
+
+if command -v yq &>/dev/null; then
+  # yq is a YAML processor (like jq but for YAML).
+  # --front-matter=extract: tells yq to pull the YAML block between --- markers
+  # '.tags[]': YAML query — get each element of the "tags" array
+  # 2>/dev/null: suppress errors (e.g., files with no tags field)
+  # "|| true": if yq fails (no tags), don't crash (because of set -e)
+  echo "$files" | while IFS= read -r f; do
+    #   echo "$files" — prints the file list
+    #   | — pipe: sends output of left command as input to right command
+    #   while IFS= read -r f — reads one line at a time into variable $f
+    #     IFS=  : don't trim whitespace from lines
+    #     -r    : don't interpret backslashes
+    yq --front-matter=extract '.tags[]' "$f" 2>/dev/null || true
+  done
+else
+  # --- Fallback: parse frontmatter with awk ---
+  # awk is a text-processing language. It reads input line by line
+  # and runs the code blocks whose patterns match the current line.
+
+  echo "$files" | while IFS= read -r f; do
+    awk '
+      # /^---$/ matches a line that is exactly "---"
+      # ++c increments counter c. First --- sets c=1, second sets c=2.
+      /^---$/ { if (++c == 2) exit }  # stop after frontmatter ends
+
+      # Inside frontmatter (c==1), look for a line starting with "tags:"
+      c == 1 && /^tags:/ {
+
+        # Handle inline format: tags: [bash, tooling, markdown]
+        if (match($0, /\[.*\]/)) {
+          # Extract the text inside the brackets
+          s = substr($0, RSTART+1, RLENGTH-2)
+          # Split by commas (with optional spaces) into array a
+          n = split(s, a, /[, ]+/)
+          # Print each tag
+          for (i = 1; i <= n; i++) if (a[i] != "") print a[i]
+          next  # skip to next line
+        }
+
+        # If no brackets, tags are in block list format (next lines).
+        # Set a flag so we know to look for "- item" lines.
+        intags = 1; next
+      }
+
+      # While in block list mode, lines like "  - bash" are tag entries.
+      # gsub replaces the leading "  - " with nothing, leaving just the tag.
+      intags && /^  *- / { gsub(/^  *- */, ""); print; next }
+
+      # A line that doesnt start with spaces means the tags block ended.
+      intags && !/^  / { intags = 0 }
+    ' "$f"
+  done
+fi | sort -u
+# sort -u: sort alphabetically and remove duplicates (-u = unique)
+# This receives ALL tags from ALL files (piped from the if/else block)
+# and outputs the final deduplicated, sorted list.
