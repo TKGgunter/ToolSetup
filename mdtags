@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# TODO 
+# add verbose mode
+# if no tags found out put a help message. 
+
 # "strict mode" — makes bash behave more like a compiled language:
 #   -e: exit immediately if any command fails
 #   -u: error on undefined variables (instead of silently using "")
