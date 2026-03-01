@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Simple script to open nvim in the Notes directory
+# Simple script to open nvim in a hard coded notes directory
+if [[ ! -d ~/Documents/Notes ]]; then
+    echo "Notes directory doesn't exist."
+fi
+
 cd ~/Documents/Notes/
 nvim
 cd -
