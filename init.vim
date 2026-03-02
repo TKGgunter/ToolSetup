@@ -190,6 +190,27 @@ command -nargs=0 Hterm :hor term
 " Use skeleton template when creating a markdown file
 " TODO :help skeleton to auto add date created
 autocmd BufNewFile *.md 0r ~/vim/skeleton.md
+autocmd BufNewFile *.md ks| call InsertCreatedParameters()|'s
+fun InsertCreatedParameters()
+    if line("$") > 20
+        let l = 20
+    else 
+        let l = line("$")
+    endif
+    exe "1," .. l .. "g/created:/s/created:.*/created: " .. strftime("%Y-%m-%d")
+    exe "1," .. l .. "g/author:/s/author:.*/author: " .. $USER
+endfun
+
+autocmd BufWritePre,FileWritePre *.md ks| call InsertModifiedDate()|'s
+fun InsertModifiedDate()
+    if line("$") > 20
+        let l = 20
+    else 
+        let l = line("$")
+    endif
+    exe "1," .. l .. "g/modified:/s/modified:.*/modified: " .. strftime("%Y-%m-%d")
+endfun
+
 
 
 " Plug in manager is Vim-plug
