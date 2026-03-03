@@ -12,3 +12,9 @@
 Nice Alias
 `git log --oneline --decorate --graph --all`
 `kitty +kitten icat`
+
+## experimenting
+- bat and bat-extras
+- ohmyzsh
+    - command suggestions
+    - command parameter tab options
