@@ -452,7 +452,7 @@ au VimEnter * GitGutterLineHighlightsDisable
 hi RenderMarkdownH1Bg ctermbg=darkgrey
 hi RenderMarkdownCode ctermbg=236
 hi RenderMarkdownH4Bg ctermbg=black
-
+hi RenderMarkdownTableFill ctermbg=236
 
 " change Pmenu colors to not purple
 hi Pmenu ctermbg=darkgrey
