@@ -24,11 +24,24 @@ cp vim/* ~/vim/.
 # move the ghostty config where it needs to be.
 if [[ $OSTYPE == "linux-gnu" ]]; then
     cp ghostty/config ~/.config/ghostty
+    # This may only work on X11
+    # xset can be used to set repeat rate
+    # - First number (200): delay before repeat starts (milliseconds)
+    # - Second number (30): repeat rate (characters per second)
+    #
+    # Make permanent (add to ~/.xinitrc or ~/.xprofile):
+    # bash
+    # echo "xset r rate 200 30" >> ~/.xinitrc
+    #
+    # TODO
+    # What are linux defaults?
+    # xset r rate 200 30
 
 elif [[ $OSTYPE =~ "darwin" ]]; then
     cp ghostty/config $HOME/Library/Application\ Support/com.mitchellh.ghostty/config
     # TODO
-    # Lets move this into some separate scripts
+    # Lets move this into some separate scripts, have it run in as part of
+    # terminal startup.
     #
     # NOTE
     # The key repeat is changed to reduce a common input issue in vim. When
@@ -38,8 +51,9 @@ elif [[ $OSTYPE =~ "darwin" ]]; then
     # `4` is repeated resulting in unwanted repeated inputs.
     delay=$(defaults read NSGlobalDomain InitialKeyRepeat)
     echo "Current key repeat delay settings: ${delay}"
-    echo "Setting the new key repeat delay to '50'"
-    defaults write NSGlobalDomain InitialKeyRepeat -int  50
+    delay=80
+    echo "Setting the new key repeat delay to \'${delay}\'"
+    defaults write NSGlobalDomain InitialKeyRepeat -int  $delay
 else
     echo "Unknown os: $OSTYPE"
 fi
