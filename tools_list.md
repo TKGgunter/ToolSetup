@@ -22,8 +22,17 @@ Nice Alias
 - ohmyzsh
     - command suggestions
     - command parameter tab options
+    - Current thoughts:
+        - Not sure what the hype is about. The shadow of previous commands are
+          alittle annoying. And tab complete doesn't seem to offer much.
 - local excalidraw with the mermaid conversion extension
     - https://github.com/excalidraw/mermaid-to-excalidraw#
     - I would like to:
         - Feed in mermaid files directly
         - extend to d2 perhaps by having a in between conversion.
+- pass 
+    - https://www.passwordstore.org/
+    - for password management
+- passmenu
+    - https://git.zx2c4.com/password-store/tree/contrib/dmenu/passmenu
+    - to view passwords
