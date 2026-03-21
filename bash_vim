@@ -1,0 +1,6 @@
+# Bash settings for vim mode
+
+set -o vi
+set show-mode-in-prompt on
+bind 'set vi-ins-mode-string (ins)\1\e[5 q\e]12; \a\2'
+bind 'set vi-cmd-mode-string (cmd)\1\e[1 q\e]12; \a\2'
