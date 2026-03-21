@@ -16,6 +16,7 @@ cp init.vim ~/.config/nvim/.
 cp search_tags.sh ~/.local/bin/.
 cp notes ~/.local/bin/.
 cp mdtags ~/.local/bin/.
+cp bash_vim ~/.bash_vim
 
 # copy vim skeleton templates
 mkdir -p ~/vim/
