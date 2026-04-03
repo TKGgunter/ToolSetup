@@ -14,6 +14,9 @@
 - pip3 install pyright
 - local excalidraw with the mermaid conversion extension
     - https://github.com/excalidraw/mermaid-to-excalidraw#
+- yq
+    - used for toml and yaml parsing
+
 
 Nice Alias
 `git log --oneline --decorate --graph --all`
@@ -30,7 +33,6 @@ bat and bat-extras:
     - Current thoughts:
         - Not sure what the hype is about. The shadow of previous commands are
           a little annoying. And tab complete doesn't seem to offer much.
-
 - excalidraw extensions:
     - Feed in mermaid files directly
     - extend to d2 perhaps by having a in between conversion.
