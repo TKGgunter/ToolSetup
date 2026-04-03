@@ -29,7 +29,7 @@ bat and bat-extras:
     - command parameter tab options
     - Current thoughts:
         - Not sure what the hype is about. The shadow of previous commands are
-          alittle annoying. And tab complete doesn't seem to offer much.
+          a little annoying. And tab complete doesn't seem to offer much.
 
 - excalidraw extensions:
     - Feed in mermaid files directly
