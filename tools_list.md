@@ -1,9 +1,13 @@
+## text editor
+- nvim version 11.6 -> 12
+
 ## our nice terminal
 - ghostty https://ghostty.org/
 
 ## use this to view images in the terminal
 - kitty for terminal image rendering
     - https://sw.kovidgoyal.net/kitty/binary/
+
 ### Back up image rendering
 - chafa https://hpjansson.org/chafa
 
