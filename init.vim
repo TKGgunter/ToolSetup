@@ -210,6 +210,9 @@ fun InsertModifiedDate()
     endif
     exe "1," .. l .. "g/modified:/s/modified:.*/modified: " .. strftime("%Y-%m-%d")
 endfun
+" There is something wrong with BufNewFile working on new file creation from
+" the cli. 
+autocmd VimEnter *.md if expand('%') != '' && !filereadable(expand('%')) | doautocmd BufNewFile 0r ~/vim/skeleton.md | endif
 
 
 
@@ -467,13 +470,15 @@ hi SpecialComment ctermfg=darkgray
 
 " config ruff-lsp.
 lua << EOF
-require('lspconfig').ruff.setup {
-    init_options = {
-        settings = {
-            args = {},
-        }
+vim.lsp.config('ruff', {
+  init_options = {
+    settings = {
+      -- Ruff language server settings go here
     }
-}
+  }
+})
+
+vim.lsp.enable('ruff')
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
   callback = function(args)
@@ -491,6 +496,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.lsp.enable("basedpyright")
 -- TODO do we need this?
+-- require('lspconfig') is being deprecated
 --[[
 require('lspconfig').pyright.setup {
   settings = {
