@@ -59,6 +59,7 @@ set foldlevelstart=99
 
 " ''''''''''''''''''''''''''''''''
 " Status Bar
+
 au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=darkcyan ctermbg=white
 au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=darkcyan ctermbg=black
 hi                  statusline guifg=#8fbfdc guibg=black ctermfg=darkcyan ctermbg=black
@@ -91,8 +92,7 @@ let g:modes={
 
 set laststatus=2
 
-set statusline=
-set statusline+=%#Cyan#\ %<%F%m%r%h%w\         " File path, modified, readonly, helpfile, preview
+set statusline=%#Cyan#\ %<%F%m%r%h%w\         " File path, modified, readonly, helpfile, preview
 set statusline+=%#StatusLine2#│                " Separator
 set statusline+=\ %Y\                          " FileType
 set statusline+=│                              " Separator
