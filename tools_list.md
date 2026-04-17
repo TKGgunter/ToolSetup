@@ -21,6 +21,8 @@
 - yq
     - used for toml and yaml parsing
 
+- markdown renderer in the browser
+    - https://github.com/simov/markdown-viewer
 
 Nice Alias
 `git log --oneline --decorate --graph --all`
