@@ -52,3 +52,11 @@ bat and bat-extras:
 
 - Creating gifs using ffmpeg. I'm currently thinking of using this with excalidraw
     `ffmpeg -framerate 10 -i img%03d.png output.gif`
+
+---
+# To research
+- github tooling alternatives
+    - alternative sites (eg gitlab)
+    - local host versions
+        - gerrit https://www.gerritcodereview.com/
+
