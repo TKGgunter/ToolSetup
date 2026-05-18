@@ -59,4 +59,5 @@ bat and bat-extras:
     - alternative sites (eg gitlab)
     - local host versions
         - gerrit https://www.gerritcodereview.com/
-
+- `pre-push` diff code check using llm 
+- setup gitlab auto-sde?
