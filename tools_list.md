@@ -54,10 +54,15 @@ bat and bat-extras:
     `ffmpeg -framerate 10 -i img%03d.png output.gif`
 
 ---
-# To research
+# To Research
 - github tooling alternatives
     - alternative sites (eg gitlab)
     - local host versions
         - gerrit https://www.gerritcodereview.com/
+    - s3 for git? https://github.com/awslabs/git-remote-s3
 - `pre-push` diff code check using llm 
 - setup gitlab auto-sde?
+- gitlab for code and task management
+- google for email, drive, sharing docs
+- aws for  website deployment, data storage and lambdas
+- terraform for pipelines and virtual asset management
