@@ -468,6 +468,11 @@ hi PmenuMatch ctermbg=darkgrey
 " the code through the docstrings
 hi SpecialComment ctermfg=darkgray
 
+" config odin lsp
+lua << EOF
+require('lspconfig').ols.setup {}
+EOF
+
 " config ruff-lsp.
 lua << EOF
 vim.lsp.config('ruff', {
