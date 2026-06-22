@@ -395,7 +395,7 @@ nmap <Leader>b : Telescope buffers<CR>
 " open a fuzzy search for the contents of files in current buffer
 nmap <Leader>f : Telescope live_grep<CR>
 " fuzzy search the odin libs
-nmap <Leader>of : Telescope live_grep search_dirs={"$HOME/Documents/Odin/odin-linux-amd64-nightly+2026-05-03"}<CR>
+nmap <Leader>of : Telescope live_grep search_dirs={"$HOME/Documents/Odin/odin-linux-amd64-nightly+2026-05-03"} path_display={"smart"}<CR>
 " Opens a hover virtual panel
 " you can also do this with shift+k
 nmap <Leader>lh : LspHover<CR>
