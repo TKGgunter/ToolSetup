@@ -392,8 +392,10 @@ EOF
 nmap <Leader>vt : Vterm<CR>
 " opens a list of open buffers in a preview menu.
 nmap <Leader>b : Telescope buffers<CR>
-" open a fuzzy search for the contents of files
+" open a fuzzy search for the contents of files in current buffer
 nmap <Leader>f : Telescope live_grep<CR>
+" fuzzy search the odin libs
+nmap <Leader>of : Telescope live_grep search_dirs={"$HOME/Documents/Odin/odin-linux-amd64-nightly+2026-05-03"}<CR>
 " Opens a hover virtual panel
 " you can also do this with shift+k
 nmap <Leader>lh : LspHover<CR>
@@ -553,8 +555,8 @@ function! RememberShortCuts() abort
                                               \ "'%' - jump to opposite(open/close) bracket.",
                                               \ "'}' - jump to bottom of code block",
                                               \ "'<Leader>/' - clear search highlights",
-                                              \ "'<Leader>b' - Telescope current buffers",
-                                              \ "'<Leader>f' - Telescope live_grep",
+                                              \ "'<Leader>vt' - open terminal on left side",
+                                              \ "'<Leader>of' - fuzzy search odin source",
                                               \ "'<Leader>rd2' - replace selected with  d2 ascii",
                                               \ "'! pandoc -f asciidoc -t markdown' - call pandoc to convert"])
 
