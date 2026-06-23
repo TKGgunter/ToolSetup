@@ -488,13 +488,7 @@ EOF
 
 " config ruff-lsp.
 lua << EOF
-vim.lsp.config('ruff', {
-  init_options = {
-    settings = {
-      -- Ruff language server settings go here
-    }
-  }
-})
+vim.lsp.config('ruff', {})
 
 vim.lsp.enable('ruff')
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -513,24 +507,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.lsp.enable("basedpyright")
--- TODO do we need this?
--- require('lspconfig') is being deprecated
---[[
-require('lspconfig').pyright.setup {
-  settings = {
-    pyright = {
-      -- Using Ruff's import organizer
-      disableOrganizeImports = true,
-    },
-    python = {
-      analysis = {
-        -- Ignore all files for analysis to exclusively use Ruff for linting
-        ignore = { '*' },
-      },
-    },
-  },
-}
-]]
 EOF
 
 
