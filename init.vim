@@ -506,6 +506,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   desc = 'LSP: Disable hover capability from Ruff',
 })
 
+-- You may need to add basedpyright to the PATH manually.
 vim.lsp.enable("basedpyright")
 EOF
 
